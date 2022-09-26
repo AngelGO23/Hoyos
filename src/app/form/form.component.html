@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">ADD PRODUCT (Model Driven Form)</h4>
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="productForm" (ngSubmit)="saveForm(productForm.value)" novalidate>
+            <div class="form-group" [ngClass]="{'error': !validateTitle()}">
+              <label>Title</label>
+              <em *ngIf="!validateTitle() && Title?.errors?.required">Required</em>
+              <em *ngIf="!validateTitle() && Title?.errors?.pattern">Must start with Letter</em>
+              <input maxLength="10" formControlName='title' type="text" class="form-control">
+            </div>
+            <div class="form-group" [ngClass]="{'error':!validateModelName()}">
+              <label>Model Name</label>
+              <em *ngIf="!validateModelName()">Required</em>
+              <input formControlName="modelName" type="text" class="form-control">
+            </div>
+            <div class="form-group" [ngClass]="{'error': !validateColor()}">
+              <label>Color</label>
+              <em *ngIf="!validateColor()">Required</em>
+              <input formControlName="color" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Product Type</label>
+              <select formControlName="productType" class="form-control">
+                <option *ngFor="let p of productTypes" [value]="p">{{p}}</option>
+              </select>
+            </div>
+            <div class="form-group" [ngClass]="{'error': !validateBrand()}">
+              <label>Brand</label>
+              <em *ngIf="!validateBrand()">Required</em>
+              <input formControlName="brand" type="text" class="form-control">
+            </div>
+            <div class="form-group" [ngClass]="{'error': !validatePrice()}">
+              <label>Price</label>
+              <em *ngIf="!validatePrice() && Price?.errors?.required">Required</em>
+              <em *ngIf="!validatePrice() && Price?.errors?.pattern">Must be a number</em>
+              <input formControlName="price" type="text" class="form-control">
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button class="btn btn-default" (click)="onCancel()">Reset</button>
+            </div>
+            <em *ngIf="!Submit">Please fill in all fields</em>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
